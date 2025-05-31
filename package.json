@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nx run-many -t dev -p admin -p products-api -p frontend -p fulfillment-api --parallel 5",
-    "clean": "rm -rf node_modules && rm -rf pnpm-lock.yaml && rm -rf */**/node_modules && rm -rf */**/pnpm-lock.yaml"
+    "dev:mac": "nx run-many -t dev -p admin -p products-api -p frontend -p fulfillment-api -p mcp-order-server --parallel 5",
+    "dev:win": "nx run-many -t dev:win -p admin -p products-api -p frontend -p fulfillment-api -p mcp-order-server --parallel 5",
+    "dev:terminals:win": "start cmd /k \"cd apps\\frontend && pnpm dev:win\" && start cmd /k \"cd apps\\admin && pnpm dev:win\" && start cmd /k \"cd apps\\products-api && pnpm dev:win\" && start cmd /k \"cd apps\\fulfillment-api && pnpm dev:win\" && start cmd /k \"cd apps\\mcp-order-server && pnpm dev:win\"",
+    "clean:mac": "rm -rf node_modules && rm -rf pnpm-lock.yaml && rm -rf */**/node_modules && rm -rf */**/pnpm-lock.yaml",
+    "clean:win": "if exist node_modules rmdir /s /q node_modules && if exist pnpm-lock.yaml del /f /q pnpm-lock.yaml && for /d /r . %d in (node_modules) do @if exist \"%d\" rmdir /s /q \"%d\" && for /d /r . %d in (pnpm-lock.yaml) do @if exist \"%d\" del /f /q \"%d\"",
+    "install:win": "pnpm install && cd apps && for /d %d in (*) do (cd %d && pnpm install && cd ..)",
+    "install:mac": "pnpm install && cd apps && for d in */; do (cd \"$d\" && pnpm install && cd ..); done"
   },
   "keywords": [],
   "author": "",

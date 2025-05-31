@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { anthropic } from "@ai-sdk/anthropic";
+import { createOpenAI } from "@ai-sdk/openai";
 import { streamText } from "ai";
 
 import getTools from "./ai-tools";
@@ -21,6 +21,13 @@ You can purchase a product by using the purchase tool.
 
 After purchasing a product tell the customer they've made a great choice and their order will be processed soon and they will be playing their new guitar in no time.
 `;
+
+// Configure OpenAI client
+const openaiProvider = createOpenAI({
+  apiKey: process.env.VITE_OPENAI_API_KEY,
+});
+
+const openaiClient = openaiProvider("gpt-4-turbo");
 
 export const genAIResponse = createServerFn({ method: "POST", response: "raw" })
   .validator(
@@ -45,7 +52,7 @@ export const genAIResponse = createServerFn({ method: "POST", response: "raw" })
 
     try {
       const result = streamText({
-        model: anthropic("claude-3-5-sonnet-latest"),
+        model: openaiClient,
         messages,
         system: SYSTEM_PROMPT,
         maxSteps: 20,

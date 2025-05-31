@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "PORT=8080 tsx watch server.ts"
+    "dev": "PORT=8080 tsx watch server.ts",
+    "dev:win": "set PORT=8080 && tsx watch server.ts"
   },
   "keywords": [],
   "author": "",
