@@ -115,11 +115,11 @@ pnpm dev:mac
 
 After starting the development servers, you can access the applications at:
 
-- Frontend (Customer Portal): `http://localhost:3000`
 - Admin Dashboard: `http://localhost:3001`
-- Products API: `http://localhost:3002`
-- Fulfillment API: `http://localhost:3003`
-- MCP Order Server: `http://localhost:3004`
+- Frontend (Customer Portal): `http://localhost:3000`
+- Products API: `http://localhost:8082`
+- Fulfillment API: `http://localhost:8080`
+- MCP Order Server: `http://localhost:8081`
 
 ### Cleaning the Project
 

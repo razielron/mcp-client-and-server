@@ -102,6 +102,10 @@ export default function AIAssistant() {
       });
     },
     onToolCall: (call) => {
+      console.log("Model decided to call tool:", {
+        toolName: call.toolCall.toolName,
+        args: call.toolCall.args,
+      });
       if (call.toolCall.toolName === "recommendGuitar") {
         return "Handled by the UI";
       }

@@ -37,6 +37,8 @@ export const genAIResponse = createServerFn({ method: "POST", response: "raw" })
     }) => d
   )
   .handler(async ({ data }) => {
+    console.log(JSON.stringify({ messages: data.messages }));
+
     const messages = data.messages
       .filter(
         (msg) =>
