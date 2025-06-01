@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createOpenAI } from "@ai-sdk/openai";
 import { streamText } from "ai";
+import type { Tool, ToolSet } from "ai";
 
 import getTools from "./ai-tools";
 
@@ -27,6 +28,8 @@ const openaiProvider = createOpenAI({
   apiKey: process.env.VITE_OPENAI_API_KEY,
 });
 
+console.log({ openaikey: process.env.VITE_OPENAI_API_KEY });
+
 const openaiClient = openaiProvider("gpt-4-turbo");
 
 export const genAIResponse = createServerFn({ method: "POST", response: "raw" })
@@ -49,6 +52,7 @@ export const genAIResponse = createServerFn({ method: "POST", response: "raw" })
       }));
 
     const tools = await getTools();
+    console.log({ tools });
 
     try {
       const result = streamText({
@@ -59,15 +63,18 @@ export const genAIResponse = createServerFn({ method: "POST", response: "raw" })
         tools,
       });
 
-      return result.toDataStreamResponse();
+      const response = await result.toDataStreamResponse();
+      
+      return response;
     } catch (error) {
       console.error("Error in genAIResponse:", error);
-      if (error instanceof Error && error.message.includes("rate limit")) {
-        return { error: "Rate limit exceeded. Please try again in a moment." };
-      }
-      return {
-        error:
-          error instanceof Error ? error.message : "Failed to get AI response",
-      };
+      const errorMessage = error instanceof Error && error.message.includes("rate limit")
+        ? "Rate limit exceeded. Please try again in a moment."
+        : error instanceof Error ? error.message : "Failed to get AI response";
+      
+      return new Response(JSON.stringify({ error: errorMessage }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
   });
