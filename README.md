@@ -2,76 +2,11 @@
 
 This repository contains a full-stack e-commerce application with multiple microservices. The project is built using modern web technologies and follows a microservices architecture pattern.
 
-## Technologies Used
-
-### Frontend Applications
-- **Frontend (Customer Portal)**
-  - React.js
-  - TypeScript
-  - Modern UI frameworks
-  - State management libraries
-
-- **Admin Dashboard**
-  - React.js
-  - TypeScript
-  - Admin-specific UI components
-  - Dashboard analytics
-
-### Backend Services
-- **Products API**
-  - Node.js
-  - Express.js
-  - Database integration
-  - RESTful API endpoints
-
-- **Fulfillment API**
-  - Node.js
-  - Express.js
-  - Order processing
-  - Shipping integration
-
-- **MCP Order Server**
-  - Node.js
-  - Express.js
-  - Order management
-  - Payment processing
-
-### Development Tools
-- PNPM for package management
-- NX for monorepo management
-- TypeScript for type safety
-- Modern development tooling
-
-## Features
-
-### Customer Portal (Frontend)
-- Product browsing and search
-- Shopping cart functionality
-- User authentication
-- Order tracking
-- Responsive design
-
-### Admin Dashboard
-- Product management
-- Order management
-- User management
-- Analytics and reporting
-- Inventory tracking
-
-### Backend Services
-- RESTful API endpoints
-- Database integration
-- Authentication and authorization
-- Order processing
-- Payment integration
-- Shipping management
-
 ## Installation
 
 ### Prerequisites
-- Node.js (Latest LTS version)
-- PNPM (version 10.6.5 or higher)
-- Git
+- Node.js (v20+)
+- PNPM (v9+)
 
 ### Setup Instructions
 
@@ -99,10 +34,6 @@ pnpm install:mac
 
 For Windows:
 ```bash
-# Run all services in parallel
-pnpm dev:win
-
-# Or run in separate terminals
 pnpm dev:terminals:win
 ```
 
@@ -134,6 +65,36 @@ For Mac:
 ```bash
 pnpm clean:mac
 ```
+
+## Project Structure
+
+```
+mcp-client-and-server/
+├── apps/
+│   ├── admin/              # Admin dashboard application
+│   ├── frontend/           # Customer portal application
+│   ├── mcp-order-server/   # Order management service
+│   ├── fulfillment-api/    # Fulfillment service
+│   └── products-api/       # Product management service
+├── package.json           # Root package.json
+└── pnpm-workspace.yaml    # PNPM workspace configuration
+```
+
+## Features
+
+### Customer Portal (Frontend)
+- Product browsing and search
+- Shopping cart functionality
+- Order tracking
+- Responsive design
+
+### Admin Dashboard
+- Product management
+- Order management
+- Inventory tracking
+
+### Backend Services
+- RESTful API endpoints
 
 ## API Contract
 
@@ -171,18 +132,4 @@ The MCP (Model Context Protocol) Server provides the following tools:
 
 The MCP Server can be accessed via:
 - SSE (Server-Sent Events) endpoint: `http://localhost:8081/sse`
-- Messages endpoint: `http://localhost:8081/messages`
-
-## Project Structure
-
-```
-mcp-client-and-server/
-├── apps/
-│   ├── admin/              # Admin dashboard application
-│   ├── frontend/           # Customer portal application
-│   ├── mcp-order-server/   # Order management service
-│   ├── fulfillment-api/    # Fulfillment service
-│   └── products-api/       # Product management service
-├── package.json           # Root package.json
-└── pnpm-workspace.yaml    # PNPM workspace configuration
-``` 
+- Messages endpoint: `http://localhost:8081/messages` 
