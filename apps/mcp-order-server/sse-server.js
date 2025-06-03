@@ -9,7 +9,7 @@ const app = express();
 // Store the SSE transport instance for message handling
 let transport;
 
-// TODO: Implement the SSE endpoint that establishes a server-sent events connection
+// TODO: PHASE 2.4 - Implement the SSE endpoint that establishes a server-sent events connection
 // Requirements:
 // 1. Create a GET route for "/sse" that handles async requests
 // 2. Create a new SSEServerTransport instance with the path "/messages" and the response object
@@ -17,7 +17,7 @@ let transport;
 // 4. Connect the server to the transport using server.connect()
 // 5. The endpoint should be async and handle the request/response objects
 
-// TODO: Implement the message handling endpoint
+// TODO: PHASE 2.5 - Implement the message handling endpoint
 // Requirements:
 // 1. Create a POST route for "/messages" that handles async requests
 // 2. Use the transport instance to handle the incoming message
